@@ -1,0 +1,141 @@
+{% extends 'layouts/main.html' %}
+{% load static %}
+{% block head %}
+{% endblock head %}
+{% block title %}
+    Sale
+{% endblock title %}
+{% block content %}
+    <br><br><br><br>
+    <div class="input-group" style="width: 300px;">
+        {% csrf_token %}
+        <input type="search" class="form-control rounded" placeholder="Search" id="search_bar" oninput="mySearch()"> 
+    </div>
+    
+    <section class="bg-light py-4 my-5" style="min-height:600px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h4 class="mb-3">Favourite Item</h4>
+                    <hr style="border-color:#b8bfc2;">
+                </div>
+            
+                <table>
+                    <tr>
+                        <th>Image</th>
+                        <th>Product Name</th>
+                        <th>Unit</th>
+                    </tr>
+                
+                    {% for item in product %}
+                        <tr>
+                            <td><img src="{{item.product_image.url}}" height="75px" alt="{{item.product.name}}"></td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.price | stringformat:'d'}}</td>
+                        </tr>
+                    {% endfor %}
+                    
+                </table>
+            </div>
+        </div>
+    </section>
+    
+{% endblock content %}
+{% block scripts %}
+
+<script>
+
+    function mySearch() {
+        var inputValue = document.getElementById('search_bar').value;
+        sendToServer(inputValue);
+    }
+    
+    function sendToServer(value) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/search", true);
+        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    var searchResult = response.search_result;
+                    updateTable(searchResult);
+                } else {
+                    console.error('Request failed:', xhr.status);
+                }
+            }
+        };
+        xhr.send('search_query=' + encodeURIComponent(value));
+    }    
+
+    /*function updateTable(searchResult) {
+        var tableBody = document.querySelector('table tbody');
+       /* var headerRow = document.createElement('tr');
+        tableBody.innerHTML = '';
+
+        headerRow.innerHTML = `
+            <th>Image</th>
+            <th>Product Name</th>
+            <th>Unit</th>
+        `;
+        tableBody.appendChild(headerRow);
+    
+        searchResult.forEach(function(item) {
+            var mediaUrl = "{% get_media_prefix %}";
+            var imageUrl = mediaUrl + item.product_image;
+            var row = document.createElement('tr');
+            row.innerHTML = '
+                <td><img src="${imageUrl}" height="75px" alt="${item.name}"></td>
+                <td>${item.name}</td>
+                <td>${item.price}</td>
+            ';
+            tableBody.appendChild(row);
+        });
+    }*/
+
+    function updateTable(searchResult) {
+        var tableBody = document.querySelector('table tbody');
+        tableBody.innerHTML = ''; 
+
+        var tableBody = document.querySelector('table tbody');
+        tableBody.innerHTML = '';
+
+        var headerRow = document.createElement('tr');
+        headerRow.innerHTML = `
+            <th>Image</th>
+            <th>Product Name</th>
+            <th>Unit</th>
+        `;
+        tableBody.appendChild(headerRow);
+        
+        searchResult.forEach(function(item) {
+            var mediaUrl = "{% get_media_prefix %}";
+            var imageUrl = mediaUrl + item.product_image;
+            var row = document.createElement('tr');
+            row.innerHTML = `
+                <td><img src="${imageUrl}" height="75px" alt="${item.name}"></td>
+                <td>${item.name}</td>
+                <td>${item.price}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+    }
+    
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                // Check if the cookie name matches the parameter
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+</script>
+{% endblock scripts %}

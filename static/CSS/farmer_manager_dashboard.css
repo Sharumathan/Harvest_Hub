@@ -1,0 +1,43 @@
+/* Farmer Manager Navigation */
+.farmer_manager_navigation {
+  position: relative;
+  top: 49px;
+  overflow-x: hidden;
+  width: 15vw;
+  height: 645px;
+  font-size: 1.2vw;
+  font-weight: bold;
+  text-align: center;
+  background-color: #101a33;
+}
+
+.farmer_manager_navigation ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  
+}
+
+.farmer_manager_navigation li a {
+  display: flex;
+  align-items: center;
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  text-align: center;
+  
+}
+
+.farmer_manager_navigation li a:hover {
+  background-color: #1a2342;
+}
+
+.farmer_manager_navigation ul li h1 {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 2vw;
+  color: white;
+  background-color: #1a2342;
+  padding: 12px 4px;
+}

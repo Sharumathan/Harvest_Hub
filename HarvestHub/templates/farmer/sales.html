@@ -1,0 +1,117 @@
+{% extends 'layouts/main.html' %}
+{% load static %}
+{% block head%}
+{% endblock head%}
+{% block title %}
+    Sales
+{% endblock title %}
+{% block content %}
+    {% if message %}
+        <script>
+            // Display alert message using JavaScript
+            alert("{{ message }}");
+        </script>
+    {% endif %}
+
+<section class="text-center">
+    <!-- Background image -->
+    <div class="p-5 bg-image" style="
+          background-image: url({% static 'images/sales.jpg' %});
+          height: 68.68vh;
+          argin-top: 80px;
+          "></div>
+    <!-- Background image -->
+  
+    <div class="card mx-4 mx-md-5 shadow-5-strong" style="
+        margin-top: -100px;
+        position: relative;
+        left: 13vw;
+        background: hsla(0, 0%, 100%, 0.8);
+        backdrop-filter: blur(30px);
+        width:70vw;
+        ">
+        <div class="card-body py-5 px-md-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-8">
+                    <h2 class="fw-bold mb-5">Sales Form</h2>
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <div class="form-outline mb-4">
+                            <select id="name" name="name" class="form-select">
+                                <option value="" selected disabled>Select The Product</option>
+                                {% for product in sell_product %}
+                                    <option value="{{ product.name }}" data-extra-info={{ product.price}}>{{ product.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+        
+                        <div class="form-outline mb-4">
+                            <input type="text" id="quantity" name="quantity" class="form-control" />
+                            <label class="form-label font-weight-bold" for="form3Example4" id='remove_label'>Quantity(Kg)</label>
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <input type="hidden" id="total" name="total" class="form-control" readonly style="text-align: center;"/>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-info btn-block mb-4">submit</button>
+
+                    </form>
+                </div>
+            </div>
+      </div>
+    </div>
+  </section>
+ 
+
+{% endblock content %}
+{% block scripts %}
+
+    <script>
+        function validateForm() {
+            var quantity = document.getElementById('quantity').value;
+
+            var name = document.getElementById('name').value;
+
+            if (name === '') {
+                alert('Please Select One');
+                var quantityLabel = document.querySelector('label[for="form3Example4"]');
+                if (quantityLabel) {
+                    quantityLabel.style.display = 'none';
+                }
+                return false;
+            }
+            // Check if quantity is empty or not a valid number
+            if (quantity === '' || isNaN(quantity)) {
+                alert('Please enter a valid quantity.');
+                return false;
+            }
+            return true; // Allow form submission if validation passes
+        }
+
+        document.querySelector('form').onsubmit = validateForm;
+
+        var extraInfo ;
+        var selectElement = document.getElementById("name");
+        selectElement.addEventListener("change", function() {
+            var selectedOption = selectElement.options[selectElement.selectedIndex];
+            extraInfo = selectedOption.getAttribute("data-extra-info");
+           
+        });
+
+        var quantityInput = document.getElementById("quantity");
+        quantityInput.addEventListener("input", function() {
+            var quantityValue = quantityInput.value;
+            var tot = extraInfo * quantityValue ;
+
+            var totalInput = document.getElementById("total");
+            totalInput.type = "text";
+            totalInput.value = tot + " Rs"
+
+            document.getElementById("remove_label").innerHTML = ''
+        });
+
+    </script>
+
+{% endblock scripts %}

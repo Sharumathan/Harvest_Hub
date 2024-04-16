@@ -1,0 +1,55 @@
+{% extends 'layouts/main.html' %}
+{% block title %}
+  Cart
+{% endblock title %}
+{% block content %}
+
+    <section class="bg-light py-4 my-5" style="min-height:60vh;">
+        <div class="container">
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h4 class="mb-3">Cart  Items</h4>
+                    <hr style="border-color:#b8bfc2;">
+                </div>
+            
+                <table>
+                    <tr>
+                        <th>User Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>City</th>
+                        <th>Gender</th>
+                        <th>Remove</th>
+                    </tr>
+                
+
+                    {% for farmer in farmers %}
+                        <tr>
+                            <td>{{farmer.username}}</td>
+                            <td>{{farmer.email }}</td>
+                            <td>{{farmer.phone_number}}</td>
+                            <td>{{farmer.city}}</td>
+
+                            {% if farmer.gender == 'M' %}
+                                <td>Male</td>
+                            {% elif farmer.gender == 'F' %}
+                                <td>Female</td>
+                            {% else %}
+                                <td>Other</td>
+                            {% endif%}
+
+                            <td><a href="{% url 'delete_farmer_detail' farmer.id %}"  onclick="return confirm('Are you sure? to Remove')"  class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Remove</a></td>
+                        </tr>
+                    {% endfor %}
+                
+                </table>
+            
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}
+{% block scripts %}
+{% endblock scripts %}

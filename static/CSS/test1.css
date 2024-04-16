@@ -1,0 +1,86 @@
+/* Style for form fields */
+.farmer_registration_background{
+    margin: auto;
+    margin-top: 80px;
+    margin-bottom: 40px;
+    background-image: url(../images/signup.jpg);
+    background-repeat: no-repeat;
+    min-height: 90vh;
+    width: 70vw;
+    background-size: cover;
+    color: white;
+    border-radius: 20px;
+    border-style: groove;
+}
+.farmer_registration_form{
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    width: 30vw;
+    min-height: 80vh;
+    border-radius: 20px;
+    margin: auto;
+    padding-left: 4vw;
+    
+    overflow: hidden;
+}
+
+.farmer_registration_form h2{
+    padding-left: 2vw;
+    font-weight: bolder;
+}
+
+.farmer_registration_form button{
+    position: relative;
+    left: 8vw;
+    font-weight: bolder;
+    background-color: #8b7ceb37;
+    border-radius: 20px;
+    padding: 10px 20px; 
+    color: #ffffff;
+    border: #08080837;
+}
+
+.farmer_registration_form button:hover{
+    background-color: #7ca6e037;
+    border-radius: 20px;
+    padding: 10px 20px; 
+    color: #ffffff;
+}
+
+.form-control {
+    width: 40%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: white;
+}
+
+
+/* Style for placeholders */
+::-webkit-input-placeholder {
+   color: #999; /* Change placeholder color */
+}
+
+.form-control{
+
+    height: 4vh;
+    display: inline;
+}
+
+/* Style for form labels */
+.form-container label {
+    flex-basis: 25%; /* Adjust width as needed */
+    margin-bottom: 10px;
+}
+
+.farmer_registration_background .previous_round {
+    position: relative;
+    top: 1vh;
+    left: 1vw;
+}
+
+.form-label{
+    color: white;
+}

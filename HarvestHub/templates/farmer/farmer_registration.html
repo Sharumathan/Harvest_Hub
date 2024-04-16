@@ -1,0 +1,164 @@
+{% extends 'layouts/main.html' %}
+{% load static %}
+{% block head%}
+    <link rel="stylesheet" href="{% static 'CSS/test.css' %}">
+
+{% endblock head%}
+{% block title %}
+    Farmer Registration
+{% endblock title %}
+{% block content %}
+    {% if alert_message %}
+        <script>
+            // Display alert message using JavaScript
+            alert("{{ alert_message }}");
+        </script>
+    {% endif %}
+  <div class='farmer_registration_background'>
+    <div class="card mx-4 mx-md-5 shadow-5-strong" style="margin-top: 40px;background: hsla(0, 0%, 0%, 0.4);backdrop-filter: blur(30px);width:40vw;height:90vh;position:relative;left:26.26vw; border-radius: 30px;">
+      <div class="card-body py-5 px-md-5" style="margin-top: -30px;">
+        <div class="row d-flex justify-content-center">
+          <div class="col-lg-8">
+            <h2 class="fw-bold mb-5 text-center text-info">Registation Form</h2>
+            <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+
+              <div class="form-outline mb-4" style="margin-top: -25px;">
+                <input type="text" id="username" name="username" class="form-control border-primary" />
+                <label class="form-label text-white font-weight-bold" for="form3Example4">UserName</label>
+              </div>
+
+              <div class="form-outline mb-4">
+                <input type="email" id="email" name="email" class="form-control border-primary" />
+                <label class="form-label text-white font-weight-bold" for="form3Example4">Email</label>
+              </div>
+
+              <div class="form-outline mb-4">
+                <input type="password" id="password1" name="password1" class="form-control border-primary" />
+                <label class="form-label text-white font-weight-bold" for="form3Example4">Password</label>
+              </div>
+
+              <div class="form-outline mb-4">
+                <input type="password" id="password2" name="password2" class="form-control border-primary" />
+                <label class="form-label text-white font-weight-bold" for="form3Example4">Conform Password</label>
+              </div>
+
+              <div class="form-outline mb-4">
+                <input type="text" id="city" name="city" class="form-control border-primary" />
+                <label class="form-label text-white font-weight-bold" for="form3Example4">City</label>
+              </div>
+
+              <div class="form-outline mb-4">
+                <input type="tel" id="phone" name="phone" class="form-control border-primary" />
+                <label class="form-label text-white font-weight-bold" for="form3Example4">Phone Number</label>
+              </div>
+              <small class="form-text text-muted" style="position: relative; top: -2.8vh;">phone number format +94-XXXXXXXXX or 0XXXXXXXXX</small>
+              
+
+              <div class="form-outline mb-4 text-white">
+                <label class="form-label" for="form3Example4" style="margin-right:1vw;font-size:1.5vw;color:#00FFFF">Profile Picture</label>
+                <input type="file" id="file" name="file" class="border-primary">
+              </div>
+
+              <div class="form-outline mb-4">
+                <select id="name" name="name" class="form-select">
+                  <option value="" selected disabled>Select The Gender</option>
+                  <option value="M">Male</option>
+                  <option value="F">Female</option>
+                  <option value="O">Other</option>
+                </select> 
+              </div>
+
+              <button type="submit" class="btn btn-info btn-block mb-4" style="border-radius: 40px;">submit</button>
+      
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+  </div>
+
+    
+{% endblock content %}
+{% block scripts %}
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get the form element
+      const form = document.querySelector('form');
+
+      // Add event listener for form submission
+      form.addEventListener('submit', function(event) {
+        // Prevent the default form submission
+        event.preventDefault();
+
+        // Get form fields
+        const username = document.getElementById('username').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password1 = document.getElementById('password1').value.trim();
+        const password2 = document.getElementById('password2').value.trim();
+        const city = document.getElementById('city').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const profilePicture = document.getElementById('file').value.trim();
+        const productName = document.getElementById('name').value.trim();
+
+        // Validate fields
+        if (username === '') {
+          alert('Please enter a username.');
+          return;
+        }
+
+        if (email === '') {
+          alert('Please enter an email address.');
+          return;
+        }
+
+        // Add more validation for email format if needed
+
+        if (password1 === '' || password2 === '') {
+          alert('Please enter a password in both fields.');
+          return;
+        }
+
+        if (password1 !== password2) {
+          alert('Passwords do not match.');
+          return;
+        }
+
+        if (city === '') {
+          alert('Please enter your city.');
+          return;
+        }
+
+        // Add more validation for phone number format if needed
+
+        if (phone === '') {
+          alert('Please enter your phone number.');
+          return;
+        }
+
+        const phoneRegex = /^(?:0|\+94)?\d{9}$/;
+        if (!phoneRegex.test(phone)) {
+            alert('Invalid phone number format');
+            return;
+        }
+
+        if (profilePicture === '') {
+          alert('Please upload a profile picture.');
+          return;
+        }
+
+        if (productName === '') {
+          alert('Please select a product.');
+          return;
+        }
+
+        // If all fields are valid, submit the form
+        form.submit();
+      });
+    });
+  </script>
+
+{% endblock scripts %}

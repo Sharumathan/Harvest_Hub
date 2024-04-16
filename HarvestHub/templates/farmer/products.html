@@ -1,0 +1,65 @@
+{% extends 'layouts/main.html' %}
+{% block title %}
+  Product Page
+{% endblock title %}
+{% block head %}
+{% endblock head %}
+{% block content %}
+
+  <section class="bg-light py-4 my-5" style="min-height:600px;">
+
+    <div class="container">
+
+      <div class="row">
+
+        <div class="col-12">
+          <h4 class="mb-3">{{category_name}} Products</h4>
+          <hr style="border-color:#b8bfc2;">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="{% url 'collection' %}">Collection</a></li>
+              <li class="breadcrumb-item active">{{category_name}} Collections</li>
+            </ol>
+          </nav>
+        </div>
+
+        {% for item in products %}
+          <div class="col-md-4 col-lg-3">
+
+            <div class="card my-3">
+              <img src="{{item.product_image.url}}"  class="card-image-top" style="width: 20vw; height: calc(20vw * 3 / 4);" alt="Categories">
+
+              <a href="{% url 'product_details' category_name item.name %}">
+
+                <div class="card-body" style="background-color:#e3e4e5;" >
+
+                  <div class="row">
+
+                    <div class="col">
+                      <h5 class="card-title h5_hover" style="color: #2A2F33; transition: color 0.3s;" onmouseover="this.style.color='#c7511f'" onmouseout="this.style.color='#2A2F33'">{{ item.name }}</h5>
+                    </div>
+
+                    <div class="col text-end">
+                      <h5 class="card-title new_price" style="color: #2A2F33; transition: color 0.3s;" onmouseover="this.style.color='#c7511f'" onmouseout="this.style.color='#2A2F33'">Rs.{{ item.price | stringformat:'d' }}</h5>
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </a>
+
+            </div>
+
+          </div>
+
+        {% endfor %}
+
+      </div>
+
+    </div>
+    
+  </section>
+ 
+{% endblock content %}

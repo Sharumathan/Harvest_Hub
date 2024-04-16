@@ -1,0 +1,63 @@
+{% extends 'layouts/main.html' %}
+{% load static %}
+{% block head%}
+    <link rel="stylesheet" href="{% static 'CSS/farmer_registration.css' %}">
+
+{% endblock head%}
+{% block title %}
+    Farmer Registration
+{% endblock title %}
+{% block content %}
+
+    <div class='farmer_registration_background'>
+        <br>
+        <div class='farmer_registration_form'>
+            <br>
+            <h2>Farmer Registration</h2>
+            <br>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <p>
+                    <label for="" class="form-label">User Name</label>
+                    {{form.username}}
+                </p>
+                <p>
+                    <label for="" class="form-label">Email</label>
+                    {{form.email}}
+                </p>
+                <p>
+                    <label for="" class="form-label">Password</label>
+                    {{form.password1}}
+                </p>
+                <p>
+                    <label for="" class="form-label">Confirm Password</label>
+                    {{form.password2}}
+                </p>
+            
+                <p>
+                    <label for="" class="form-label">Gender</label>
+                    {{form.gender}}
+                </p>
+                <p>
+                    <label for="" class="form-label">City</label>
+                    {{form.city}}
+                </p>
+                <p>
+                    <label for="" class="form-label">Profile Image</label>
+                    {{form.Image}}
+                </p>
+                <p>
+                    <label for="" class="form-label">Phone Number</label>
+                    {{form.phone_number}}
+                </p>
+
+                
+                <button type="submit">Register</button>
+            </form>
+        </div>
+    </div>
+
+    
+{% endblock content %}
+{% block scripts %}
+{% endblock scripts %}

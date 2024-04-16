@@ -1,0 +1,153 @@
+{% extends 'layouts/main.html' %}
+{% load static %}
+{% block head%}
+    <link rel="stylesheet" href="{% static 'CSS/test.css' %}">
+
+{% endblock head%}
+{% block title %}
+    Sale Product Price
+{% endblock title %}
+{% block content %}
+
+    <section class="bg-light py-4 my-5" style="min-height:600px;">
+        <div class="container">
+            <div class="row justify-content-center" id="crate_class" style="display:block">
+                <div class="col-md-6 text-center">
+                    <h1 style="position:relative;left:22vw;">Add Product</h1>
+                </div>
+                <form method="post" action="{% url 'add_sale_product_price' %}" onsubmit="return validateForm1()" id="create_form">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-outline mb-4">
+                                <input type="text" id="name" name="name" class="form-control border-primary" />
+                                <label class="form-label font-weight-bold">Product Name</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-outline mb-4">
+                                <input type="text" id="price" name="price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" class="form-control border-primary">
+                                <label class="form-label font-weight-bold" >Product Price</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 offset-md-3 text-center" > 
+                            <button type="submit" class="btn btn-info" style="border-radius: 40px;width: 10vw;">Submit</button> 
+                        </div>
+                    </div>
+                </form >
+            </div>
+
+            <div class="row justify-content-center" id="update_class" style="display:none">
+                <div class="col-md-6 text-center">
+                    <h1 style="position:relative;left:22vw;">Update Product</h1>
+                </div>
+                <form method="post" action="{% url 'update_sale_product_price' %}" onsubmit="return validateForm2()">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-outline mb-4">
+                                <input type="text" id="u_name" name="u_name" class="form-control border-primary" />
+                            </div>
+                        </div>
+
+                        <input type="hidden" id="p_id" name="p_id" class="form-control border-primary" />
+                            
+                        <div class="col-md-6">
+                            <div class="form-outline mb-4">
+                                <input type="text" id="u_price" name="u_price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" class="form-control border-primary">
+                            </div>
+                        </div>
+                        <div class="col-md-6 offset-md-3 text-center" > 
+                            <button type="submit" class="btn btn-info" style="border-radius: 40px;width: 10vw;">Update</button> 
+                            <a type="submit" class="btn btn-danger" style="border-radius: 40px;width: 10vw;" onclick="Cancel()">Cancel</a> 
+                        </div>
+                    </div>
+                </form >
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h4 class="mb-3">Products</h4>
+                    <hr style="border-color:#b8bfc2;">
+                </div>
+            
+                <table>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Price (Per Kg)</th>
+                        <th>Date</th>
+                        <th>Delete</th>
+                        <th>Update</th>
+                    </tr>
+                
+                    {% for item in product_details %}
+                        <tr>
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.price }}</td>
+                            <td>{{ item.created_at }}</td>
+                            <td><a href="{% url 'delete_sale_product_price' item.id %}" onclick="return confirm('Are you sure you want to remove this product?')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Remove</a></td>
+                            <td><a href="#" onclick="populateUpdateForm({{item.id}}, '{{item.name}}', {{item.price}})" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Update</a></td>
+                        </tr>
+                    {% endfor %}
+                </table> 
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}
+{% block scripts %}
+    <script>
+
+        function validateForm1() {
+            var name = document.getElementById("name").value;
+            var price = document.getElementById("price").value;
+
+            // Perform validation
+            if (name.trim() === "") {
+                alert("Please enter product name.");
+                return false;
+            }
+            if (price.trim() === "") {
+                alert("Please enter product price.");
+                return false;
+            }
+
+            return true;
+        }
+
+        function validateForm2() {
+            var name = document.getElementById("u_name").value;
+            var price = document.getElementById("u_price").value;
+
+            // Perform validation
+            if (name.trim() === "") {
+                alert("Please enter product name.");
+                return false;
+            }
+            if (price.trim() === "") {
+                alert("Please enter product price.");
+                return false;
+            }
+
+            return true;
+        }
+
+        function populateUpdateForm(id, name, price){
+            var form = document.getElementById('create_form');
+            form.removeAttribute('onsubmit');
+
+            document.getElementById('crate_class').style.display = 'none';
+            document.getElementById('update_class').style.display = 'block';
+            document.getElementById('u_name').value = name
+            document.getElementById('u_price').value = price
+            document.getElementById('p_id').value = id
+        }
+
+        function Cancel(){
+            document.getElementById('crate_class').style.display = 'block';
+            document.getElementById('update_class').style.display = 'none';
+        }
+    </script>
+    </script>
+{% endblock scripts %}

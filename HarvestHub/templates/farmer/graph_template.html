@@ -1,0 +1,128 @@
+{% extends 'layouts/main.html' %}
+{% load static %}
+{% block head %}
+  <script src="https://www.gstatic.com/charts/loader.js"></script>
+{% endblock head %}
+{% block title %}
+  Graph
+{% endblock title %}
+{% block content %}
+<div style="display: flex; justify-content: space-around;margin-top:5vh;">
+  <div id="myLineChart" style="width:100%; max-width:49vw; height:500px;"></div>
+  <div id="myPieChart" style="width:100%; max-width:49vw; height:500px;"></div>
+</div>
+
+<script>
+  google.charts.load('current', {'packages':['corechart']});  
+  google.charts.setOnLoadCallback(drawCharts);
+
+  function drawCharts() {
+    drawPieChart();
+    drawAreaChart();
+  }
+
+  function drawPieChart() {
+
+    const nameAmountMap = {};
+    {% for sale in sales %}
+      var name = '{{ sale.name }}';
+      var amount = {{ sale.total_amount }};
+      
+      if(nameAmountMap.hasOwnProperty(name)) {
+        nameAmountMap[name] += amount;
+      } 
+      else {
+        nameAmountMap[name] = amount;
+      }
+    {% endfor %}
+
+    const pieChartData = [];
+    for (const name in nameAmountMap) {
+      if (nameAmountMap.hasOwnProperty(name)) {
+        pieChartData.push([name, nameAmountMap[name]]);
+      }
+    }
+
+    const pieData = google.visualization.arrayToDataTable([
+      ['Name', 'Amount'],
+      ...pieChartData
+    ]);
+
+    const pieOptions = {
+      title: 'World Wide Wine Production',
+      is3D: true,
+      titleTextStyle: {
+        fontSize: 18,
+        color: 'red',
+        bold: true,
+        italic: true,
+        position: 'in'
+      }
+    };
+
+    const pieChart = new google.visualization.PieChart(document.getElementById('myPieChart'));
+    pieChart.draw(pieData, pieOptions);
+  }
+
+
+
+  function drawAreaChart() {
+
+    const salesByDate = {};
+    
+
+    {% for sale in sales %}
+      var saleDate = '{{ sale.created_at | date:"Y-m-d" }}';
+      var amount = {{ sale.total_amount }};
+      if (salesByDate[saleDate]) {
+        salesByDate[saleDate] += amount;
+      } else {
+        salesByDate[saleDate] = amount;
+      }
+    {% endfor %}
+
+    const aggregatedSales = Object.keys(salesByDate).map(saleDate => [saleDate, salesByDate[saleDate]]);
+    const areaData = google.visualization.arrayToDataTable([
+      ['Date', 'Revenue'],
+      ...aggregatedSales
+    ]);
+  
+    const areaOptions = {
+      title: 'Revenue vs Date',
+    
+      hAxis: { 
+        title: 'Date',
+        textStyle: {
+          color: 'blue', // Customize hAxis text color
+          fontSize: 12 // Customize hAxis text size
+        }
+      },
+    
+      vAxis: { 
+        title: 'Revenue',
+        textStyle: {
+          color: 'green', // Customize vAxis text color
+          fontSize: 12 // Customize vAxis text size
+        }
+      },
+      
+      legend: 'none',
+      titleTextStyle: {
+        fontSize: 18,
+        color: 'red',
+        bold: true,
+        italic: true,
+        position: 'in'
+      },
+      colors: ['lightred'], // Set the area color
+      series: {
+        0: { color: 'red' } // Set the color of the area line
+      }
+    };    
+  
+    const areaChart = new google.visualization.AreaChart(document.getElementById('myLineChart'));
+    areaChart.draw(areaData, areaOptions);
+  }
+</script>
+
+{% endblock content %}

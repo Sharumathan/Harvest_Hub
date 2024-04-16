@@ -1,0 +1,37 @@
+{% extends 'layouts/main.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'CSS/farmer_manager_dashboard.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{% endblock head %}
+
+{% block title %}
+    Farmer Dashboard
+{% endblock title %}
+
+{% block content %}
+
+    <div class="farmer_manager_navigation">
+        <ul>
+            <li>
+                <h1>
+                    <span class="material-icons">home</span>Dashboard
+                </h1>
+            </li>
+            
+            <li>
+                <a href="{% url 'sale_product_price' %}">
+                    <span class="material-icons">attach_money</span> Sale Product Price
+                </a>
+            </li>
+
+            
+
+        </ul>
+    </div>
+
+    <div class="manager_profile">  
+        <h1>Hi</h1>          
+    </div>
+{% endblock content %}

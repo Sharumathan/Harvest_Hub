@@ -1,0 +1,19 @@
+.farmer_registration_background{
+    margin-top: 50px;
+    background-image: url(../images/signup.jpg);
+    background-repeat: no-repeat;
+    height: 100vh;
+    background-size: cover;
+    color: white;
+    border-style: groove;
+}
+
+.form-outline .mb-4 input{
+    color: white;
+    border-radius: 20px;
+}
+
+.form-outline.mb-4 select {
+    background-color: #011b34; /* Example background color */
+    color:white;
+}

@@ -1,0 +1,146 @@
+{% extends 'layouts/main.html' %}
+{% block title %}
+    show sales farmer request
+{% endblock title %}
+{% block content %}
+    <style>
+        .form-control::placeholder {
+            color:#3498DB; 
+        }
+    </style>
+    <section class="bg-light py-4 my-5" style="min-height:60vh;">
+        <br>
+        <div class="input-group" style="width: 30vw; height: 5vh; position: relative; left: 30vw;">
+            {% csrf_token %}
+            <input type="search" class="form-control" placeholder="Search User Name or Product Name" id="search_bar" oninput="mySearch()"
+                style=" border-radius: 100px;
+                        border: 2px solid #FF33CC;
+                        height: 6vh;
+                        color:#3498DB;
+                        font-size: 16px; "> 
+        </div>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h4 class="mb-3">Sales Farmer Request</h4>
+                    <hr style="border-color:#b8bfc2;">
+                </div>
+            
+                <table>
+                    <tr>
+                        <th>User Name</th>
+                        <th>Product Name</th>
+                        <th>Quantity(Kg)</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Approve the status</th>
+                        <th>Delete</th>
+                    </tr>
+                
+
+                    {% for item in sales %}
+                        <tr>
+                            <td>{{item.user}}</td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.quantity}}</td>
+                            <td>{{item.total_amount}}</td>
+                            <td>{{item.created_at}}</td>
+                            <td>{{item.status}}</td>
+                            {% if item.status == 'Process' %}
+                                <td><a href="{% url 'approve_sales_farmer_request' item.id %}"  onclick="return confirm('Are you sure? to Approve')"  class="btn btn-success btn-sm"><i class="fa fa-check"></i> Approve</a></td>
+                                <td><a href="{% url 'delete_sales_farmer_request' item.id %}"  onclick="return confirm('Are you sure? to Delete')"  class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Delete</a></td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                
+                </table>
+            
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}
+{% block scripts %}
+
+    <script>
+
+        function mySearch() {
+            var inputValue = document.getElementById('search_bar').value;
+            sendToServer(inputValue);
+        }
+        
+        function sendToServer(value) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/show_sales_farmer_request", true);
+            xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        var searchResult = response.search_result;
+                        updateTable(searchResult);
+                    } else {
+                        console.error('Request failed:', xhr.status);
+                    }
+                }
+            };
+            xhr.send('search_query=' + encodeURIComponent(value));
+        }    
+
+        function updateTable(searchResult) {
+            var tableBody = document.querySelector('table tbody');
+            tableBody.innerHTML = ''; // Clear existing table rows
+        
+            var headerRow = document.createElement('tr');
+            headerRow.innerHTML = `
+                <th>User Name</th>
+                <th>Product Name</th>
+                <th>Quantity(Kg)</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Approve the status</th>
+                <th>Delete</th>
+            `;
+            tableBody.appendChild(headerRow);
+
+            searchResult.forEach(function(item) {
+                var row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.user}</td>
+                    <td>${item.name}</td>
+                    <td>${item.quantity}</td>
+                    <td>${item.total_amount}</td>
+                    <td>${item.created_at}</td>
+                    <td>${item.status}</td>
+                    ${item.status == 'Process' ? 
+                    `<td><a href="/approve_sales_farmer_request/${item.id}"  onclick="return confirm('Are you sure? to Approve')"  class="btn btn-success btn-sm"><i class="fa fa-check"></i> Approve</a></td>` 
+                    : ''}
+                    ${item.status == 'Process' ? 
+                    `<td><a href="/delete_sales_farmer_request/${item.id}"  onclick="return confirm('Are you sure? to Delete')"  class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Delete</a></td>` 
+                    : ''}
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+        
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    // Check if the cookie name matches the parameter
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    </script>
+{% endblock scripts %}

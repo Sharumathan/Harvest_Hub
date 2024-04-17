@@ -1,0 +1,255 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Customer Manager </title>
+     <link rel="stylesheet" href="{% static 'css/customer/customerAdmin.css'%}">
+     <!--bootsrap-->
+     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+      <!--chart js-->
+     <script src="https://cdnjs.com/libraries/Chart.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+     <!--simple data tables-->
+     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
+     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
+</head>
+<body>
+     
+     <div class="content">
+          <div class="sideBar">
+               <div class="sideBar_top">
+                    <img class="adminLogo" src="{% static 'images/customer/logo.png'%}" alt="">
+                    <span class="title">Harvest Hub</span>
+               </div>
+               <ul>
+                    <li class="clicked" id="overView"><a onclick="moveToOverview();"><img src="{% static 'images/customer/overview.png'%}" alt=""> Over view</a></li>
+                    <li id="customer"><a onclick="movetoCustomer();"><img src="{% static 'images/customer/customer.png'%}" alt="">Customer</a></li>
+                    <li id="addItems"><a onclick="movetoAdditems();"><img src="{% static 'images/customer/additems.png'%}" alt="">Add Items</a></li>
+                    <li><a href=""><img src="{% static 'images/customer/graph.png'%}" alt="">graph view</a></li>
+                    <li><a href=""><img src="{% static 'images/customer/messages.png'%}" alt="">Messages</a></li>
+               </ul>
+               <button class="logout" type="submit"> Logout <img class="logoLog" src="{% static 'images/customer/logout.png'%}" alt=""></button>
+          </div>
+          <div class="middle" id="middle">
+               <span class="welcome">Welcome,<span class="nameWEl">Sharuk</span></span><br>
+               <span class="cus">Customer Management system</span>
+               <div class="rateThree">
+                    <div class="customerRise">
+                         <div class="upper1">
+                              5%
+                         </div>
+                         <span>Customer Growth</span>
+                    </div>
+                    <div class="productSales">
+                         <div class="upper2">
+                              75%
+                         </div>
+                         <span>Feedback Growth</span>
+                    </div>
+                    <div class="unknown">
+                         <div class="upper3">
+                              33%
+                         </div>
+                         <span>Farmer Requests</span>
+                    </div>
+               </div>
+               <div class="mainGraph">
+                         <canvas id="myChart" class="barchart"></canvas>
+               </div>
+               <div class="customerPage">
+                    <span class="welcome">Customer,<span class="nameWEl">Details</span></span><br>
+                    <span class="cus">Customer Details system</span><br>
+                    <div class="hel">
+                         <input type="text" class="customerSearch" placeholder="Search Customer">
+                         <div class="submitCover_1">
+                              <label for="submit_1">
+                                   <img class="search" src="images/searchbar.png" >
+                              </label>
+                              <input class="hide" type="submit"  id="submit_1">
+                         </div>
+                    </div>
+                    <div class="detailsTable">
+                         <div class="details_all">
+                              <div class="single">
+                                   <img src="images/customer/photo3.png" alt="">
+                                   <span>RC8060027575</span>
+                                   <span>Sharu</span>
+                                   <span>Mathan</span>
+                                   <span>Sharumathan8@gmail.com</span>
+                                   <span>0764328270</span>
+                                   <input type="submit" value="Remove">
+                              </div>
+                              <div class="single">
+                                   <img src="images/customer/photo2.png" alt="">
+                                   <span>RC8060027575</span>
+                                   <span>Sharu</span>
+                                   <span>Mathan</span>
+                                   <span>Sharumathan8@gmail.com</span>
+                                   <span>0764328270</span>
+                                   <input type="submit" value="Remove">
+                              </div>
+                              <div class="single">
+                                   <img src="images/customer/photo1.png" alt="">
+                                   <span>RC8060027575</span>
+                                   <span>Sharu</span>
+                                   <span>Mathan</span>
+                                   <span>Sharumathan8@gmail.com</span>
+                                   <span>0764328270</span>
+                                   <input type="submit" value="Remove">
+                              </div>
+                              <div class="single">
+                                   <img src="images/customer/photo4.png" alt="">
+                                   <span>RC8060027575</span>
+                                   <span>Sharu</span>
+                                   <span>Mathan</span>
+                                   <span>Sharumathan8@gmail.com</span>
+                                   <span>0764328270</span>
+                                   <input type="submit" value="Remove">
+                              </div>
+                              <div class="single">
+                                   <img src="images/customer/photo1.png" alt="">
+                                   <span>RC8060027575</span>
+                                   <span>Sharu</span>
+                                   <span>Mathan</span>
+                                   <span>Sharumathan8@gmail.com</span>
+                                   <span>0764328270</span>
+                                   <input type="submit" value="Remove">
+                              </div>
+                              <div class="single">
+                                   <img src="images/customer/photo2.png" alt="">
+                                   <span>RC8060027575</span>
+                                   <span>Sharu</span>
+                                   <span>Mathan</span>
+                                   <span>Sharumathan8@gmail.com</span>
+                                   <span>0764328270</span>
+                                   <input type="submit" value="Remove">
+                              </div>
+                              <div class="single">
+                                   <img src="images/customer/photo3.png" alt="">
+                                   <span>RC8060027575</span>
+                                   <span>Sharu</span>
+                                   <span>Mathan</span>
+                                   <span>Sharumathan8@gmail.com</span>
+                                   <span>0764328270</span>
+                                   <input type="submit" value="Remove">
+                              </div>
+                              <div class="single">
+                                   <img src="images/customer/photo4.png" alt="">
+                                   <span>RC8060027575</span>
+                                   <span>Sharu</span>
+                                   <span>Mathan</span>
+                                   <span>Sharumathan8@gmail.com</span>
+                                   <span>0764328270</span>
+                                   <input type="submit" value="Remove">
+                              </div>
+                              <div class="single">
+                                   <img src="images/customer/photo3.png" alt="">
+                                   <span>RC8060027575</span>
+                                   <span>Sharu</span>
+                                   <span>Mathan</span>
+                                   <span>Sharumathan8@gmail.com</span>
+                                   <span>0764328270</span>
+                                   <input type="submit" value="Remove">
+                              </div>
+                              <div class="single">
+                                   <img src="images/customer/photo1.png" alt="">
+                                   <span>RC8060027575</span>
+                                   <span>Sharu</span>
+                                   <span>Mathan</span>
+                                   <span>Sharumathan8@gmail.com</span>
+                                   <span>0764328270</span>
+                                   <input type="submit" value="Remove">
+                              </div>
+                              <div class="single">
+                                   <img src="images/customer/photo2.png" alt="">
+                                   <span>RC8060027575</span>
+                                   <span>Sharu</span>
+                                   <span>Mathan</span>
+                                   <span>Sharumathan8@gmail.com</span>
+                                   <span>0764328270</span>
+                                   <input type="submit" value="Remove">
+                              </div>
+                              <div class="single">
+                                   <img src="images/customer/photo3.png" alt="">
+                                   <span>RC8060027575</span>
+                                   <span>Sharu</span>
+                                   <span>Mathan</span>
+                                   <span>Sharumathan8@gmail.com</span>
+                                   <span>0764328270</span>
+                                   <input type="submit" value="Remove">
+                              </div>
+                         </div>
+                         
+                    </div>
+               </div>
+          </div>
+          <div class="thirdDiv" id="thirdDiv">
+               <div class="nameProfile">
+                    <img class="bell" src="{% static 'images/customer/bell.png'%}" alt="">
+                    <span>Sharumathan Manager</span>
+                    <img class="profile" src="{% static 'images/customer/elon.jpg'%}" alt="">
+               </div>
+               <div class="thirdmid">
+                    <div class="photo">
+                         <img src="images/customer/sean-oulashin-KMn4VEeEPR8-unsplash.jpg" alt="">
+                    </div>
+                    <div class="re">
+                         <span class="thirdMidTitle">Customer Support</span>
+                         <a href="">View All</a>
+                    </div>
+                    <div class="customerReports">
+                         <div class="fullContent">
+                              <img src="images/customer/photo1.png" alt="">
+                              <div class="col">
+                                   <a class="nameS" href="">Sharumathan</a>
+                                   <span >Hii sir i am unable to make payment using my payal accout can you</span>
+                              </div>
+                         </div>
+                    </div>
+                    <div class="customerReports">
+                         <div class="fullContent">
+                              <img src="images/customer/photo4.png" alt="">
+                              <div class="col">
+                                   <a class="nameS" href="">Sharumathan</a>
+                                   <span >Hii sir i am unable to make payment using my payal accout can you</span>
+                              </div>
+                         </div>
+                    </div>
+                    <div class="customerReports">
+                         <div class="fullContent">
+                              <img src="images/customer/photo3.png" alt="">
+                              <div class="col">
+                                   <a class="nameS" href="">Sharumathan</a>
+                                   <span >Hii sir i am unable to make payment using my payal accout can you</span>
+                              </div>
+                         </div>
+                    </div>
+                    <div class="customerReports">
+                         <div class="fullContent">
+                              <img src="images/customer/photo2.png" alt="">
+                              <div class="col">
+                                   <a class="nameS" href="">Sharumathan</a>
+                                   <span >Hii sir i am unable to make payment using my payal accout can you</span>
+                              </div>
+                         </div>
+                    </div>
+                    <div class="customerReports">
+                         <div class="fullContent">
+                              <img src="images/customer/photo5.png" alt="">
+                              <div class="col">
+                                   <a class="nameS" href="">Sharumathan</a>
+                                   <span >Hii sir i am unable to make payment using my payal accout can you</span>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+     <script src="{% static 'js/customer/customerAdmin.js'%}"></script>
+</body>
+</html>

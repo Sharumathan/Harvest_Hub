@@ -1,0 +1,69 @@
+{% extends 'layouts/main.html'%}
+{% load static%}
+     {% block title %}
+          Account
+     {% endblock title %}
+
+     {% block css %}
+     <link rel="stylesheet" href="{%static 'css/customer/login_signup.css'%}">
+     <script src="https://unpkg.com/scrollreveal"></script>
+     {% endblock css%}
+
+     {% block content %}
+     <div class="body">
+          <div class="overLay"></div>
+          <div class="content">
+               <div class="form">
+                    <div class="fullForm" id="fullForm">
+                         <div class="register">
+                              <form action="account" method="post">
+                                   {%csrf_token%}
+                                   <span class="login_txt">Sign Up</span>
+                                   <div class="split_input">
+                                        <input type="text" name="fname" placeholder="First Name" class="fname">
+                                        <input type="text" name="lname" placeholder="Last Name" class="lname">
+                                   </div>
+                                   <input type="email" name="email" placeholder="E-mail" class="rInput">
+                                   <input type="text" name="phoneNo" placeholder="Phone (  0 x x   x x x x x x x  )" class="rInput">
+                                   <input type="password" name="password1" placeholder="Password" class="rInput">
+                                   <input type="password" name="password2" placeholder="Re-Enter Password" class="rInput">
+                                   <input type="submit" value="Sign Up" class="register_btn" name="submit">
+                                   <span class="in">Already have Account ? <a class="red" onclick="gotoLogin();">Sign in</a></span>
+                              </form>
+                         </div>
+                         <div class="login">
+                              <form action="account" method="post">
+                                   {%csrf_token%}
+                                   <span class="sign_in">Sign in</span>
+                                   <input type="text" name="username" placeholder="User Name"><br>
+                                   <input type="password" name="password" placeholder="Password"><br>
+                                   <a class="in" onclick="gotoForgotPassword();">Forgot Your Password ?</a><br>
+                                   <input name="submit" type="submit" value="Sign In" class="login_but">
+                                   <span class="in">Need an Account ? <a class="red" onclick="gotoRegister();">Sign Up</a></span>
+                              </form>
+                              
+                         </div>
+                         <div class="forgotPassword">
+                              <form action="account" method="post">
+                                   {%csrf_token%}
+                                   <span class="sign_in">Forgot Password ?</span>
+                                   <input type="text" name="username" placeholder="Enter username"><br>
+                                   <input name="submit" type="submit" value="Continue" class="login_but">
+                                   <span class="in">Rememberd Password ? <a class="red" onclick="gotoLogin();">Sign in</a></span>
+                              </form>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     
+     </div>
+     </div>
+     {% for message in messages%}
+     <script>
+          alert('{{message}}')
+     </script>
+     {%endfor%}
+     <script src="{%static 'js/customer/login_signup.js'%}"></script>
+</body>
+{% endblock content %}
+</html>

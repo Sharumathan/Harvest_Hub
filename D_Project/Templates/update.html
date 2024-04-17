@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <style>
+        body{
+            background-image: url("{%static 'Images/theme.webp'%}");
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        .container {
+            background-image: url("{%static 'Images/theme2.jpg'%}");
+            background-size: cover;
+            background-attachment: fixed;
+            padding: 20px;
+            color: aliceblue;
+            font-family: "Permanent Marker" , cursive;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        h3 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        label {
+            margin-top: 10px;
+        }
+        input[type="text"], input[type="submit"] {
+            margin-top: 5px;
+        }
+        .btn-primary{
+            background-color: rgb(107, 157, 33);
+            border-color: rgb(17, 147, 147);
+            padding-left: 4%;
+        }
+
+        .btn-primary:hover {
+        background-color: rgb(10, 12, 12);
+        border-color: #007bff;
+        }
+        .btn-back {
+            background-color: #094f9a; /* Bootstrap primary blue */
+            border-color: aqua; /* Ensuring consistency */
+            padding-left: 5.5%;
+            text-align: center;
+        }
+        .btn-back:hover {
+            background-color: #d32c0f;
+            border-color: #3c3b3b;
+        }
+    </style>
+</head>
+<body>
+
+<div class="row">
+    <div class="col-md-75">
+        <div class="container">
+            <form action="/updateData/{{data.id}}" method="post">
+                {% csrf_token %}
+
+                <div class="row">
+                    <div class="col-md-50 col-md-50">
+                        <h3>Update Details</h3>
+                        <label for="fname">Full Name</label>
+                        <input type="text" id="fname" class="form-control" value="{{data.Name}}" name="firstname">
+
+                        <label for="email">Email</label>
+                        <input type="text" id="email" class="form-control" value="{{data.Email}}" name="email">
+
+                        <label for="adr">Address</label>
+                        <input type="text" id="adr" class="form-control" value="{{data.Address}}" name="address">
+
+                        <label for="state">State</label>
+                        <input type="text" id="state" class="form-control" value="{{data.State}}" name="state">
+
+                        <label for="zip">Zip</label>
+                        <input type="text" id="zip" class="form-control" value="{{data.Zip}}" name="zip">
+                    </div>
+                </div>
+                <input type="submit" value="Update" class="btn btn-primary">
+            </form>
+            <form action="{% url 'View_Details' %}" method="get"> 
+                <input type="submit" value="Back" class="btn btn-back">
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script>
+    // Placeholder for any JavaScript you might want to add
+    document.addEventListener("DOMContentLoaded", function() {
+        // Example: Alert on form submission - This can be changed or expanded as needed.
+        const form = document.querySelector("form");
+        form.addEventListener("submit", function(event) {
+            // Prevent the form from submitting
+            event.preventDefault();
+            
+            // Example functionality: Alerting
+            alert("Update Your Details!");
+            
+            // To proceed with the form submission uncomment the next line
+            // form.submit();
+        });
+    });
+</script>
+
+</body>
+</html>

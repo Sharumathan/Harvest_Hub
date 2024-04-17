@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Billing Address</title>
+</head>
+<style>
+    body {
+    background-image: url("{%static 'Images/bb2.webp'%}");
+    background-size: cover;
+    background-attachment: fixed;   
+    font-family: Arial;
+    font-size: 17px;
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.row {
+    width: 100%;
+    max-width: 550px; /* Adjusts the maximum width of the form */
+}
+
+.container {
+    background-image: url("{%static 'Images/details.jpg'%}");
+    background-size: cover;
+    background-attachment: fixed;
+    border-radius: 20px;
+    padding: 25px;
+    color: aliceblue;
+    font-family: "Permanent Marker" , cursive;
+    border-style: none;
+    font-size: 11px;
+    box-shadow: 30 0 10px 0 rgba(228, 225, 225, 0.2);
+}
+
+input[type=text], .btn {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #979393;
+}
+
+input[type=text]:focus, .btn:hover {
+    background-color: rgb(141, 137, 137);
+}
+
+.btn {
+    background-color: #31cc16;
+    color: black;
+    cursor: pointer;
+    border-radius: 5px;
+    color: #f2f2f2;
+    font-size: medium;
+}
+
+.btn:hover {
+    background-color: #34cd74;
+}
+
+.btn1 {
+    background-color: rgb(12, 7, 121);
+    color: black;
+    cursor: pointer;
+    border-radius: 5px;
+    color: #f2f2f2;
+    font-size: large;
+}
+
+label {
+    margin-bottom: 9px;
+    display: block;
+}
+
+h3{
+    text-align: center;
+    background-image: url("{%static 'Images/bb2.webp'%}");
+    color: #f2f2f2;
+    font-size: large;
+}
+
+@media screen and (max-width: 700px) {
+    .row {
+        height: 500px;
+        flex-direction: column-reverse;
+        color: #f2f2f2;
+    }
+    .col-md-25, .col-md-50, .col-md-75 {
+        margin-bottom: 20px;
+        height: 200px;
+    }
+    .col-md-60{
+        margin-bottom: 20px;
+        height: 200px;
+    }
+}
+</style>
+<body>
+
+<div class="row">
+    <div class="col-md-75">
+        <div class="container">
+            <form action="addData" method="post">
+                {% csrf_token %}
+
+                <div class="row">
+                    <div class="col-md-50 col-md-50">
+                        <h3>Customer Billing Address</h3>
+                        <label for="fname">Full Name</label>
+                        <input type="text" id="fname" name="firstname" >
+
+                        <label for="email">Email</label>
+                        <input type="text" id="email" name="email" >
+
+                        <label for="adr">Address</label>
+                        <input type="text" id="adr" name="address" >
+
+                        <label for="state">State</label>
+                        <input type="text" id="state" name="state" >
+
+                        <label for="zip">Zip</label>
+                        <input type="text" id="zip" name="zip" >
+                    </div>
+                </div>
+                
+                <label>
+                    <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
+                </label>
+                    <input type="submit" value="Continue to HarvesrHub" class="btn">
+            </form>
+            <form action="View_Details" method="post">
+                {% csrf_token %}
+                <input type="submit" value="View" class="btn">
+            </form>
+            <form action="payment" method="post">
+                 {% csrf_token %}
+                <input type="submit" value="Move Payment-->" class="btn1">
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

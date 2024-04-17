@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+</head>
+<style>
+    body {
+    background-image: url("{%static 'Images/b3.jpg'%}");
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.payment-form {
+            background-color: rgb(163, 73, 177);
+            padding: 20px;
+            width: 300px;
+            border-radius: 9px;
+            border: 6px solid #c20808; /* Darker and bolder border */
+            color: rgb(16, 15, 15);
+        }
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #100f0f;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: rgb(7, 7, 21);
+    color: white;
+    padding: 15px 20px;
+    font-size: large;
+    margin: 10px 0;
+    border: none;
+    cursor: pointer;
+    width: 98%;
+
+    border-radius: 20px;
+}
+
+button:hover {
+    opacity: 0.8;
+    color: aqua;
+    background-color: rgb(6, 6, 29);
+}
+
+</style>
+<body>
+
+
+<div class="payment-form">
+    <h2>Payment Details</h2>
+    <form id="paymentForm">
+        {% csrf_token %}
+        
+        <div>
+        <div class="form-group">
+            <label for="bankReceipt">Upload Bank Receipt</label>
+            <input type="file" id="bankReceipt" accept="image/*" required>
+            <small class="form-text text-muted">Please upload a clear image of your bank receipt.</small>
+        </div>
+                
+        <div class="form-group">
+            <label for="cashOnDelivery">Payment Method</label>
+            <select id="cashOnDelivery">
+                <option value="cash">Cash on Delivery</option>
+                <option value="online">Online Payment</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+               <li>
+                {{message}}
+               </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {{form.render}}
+        </div>
+        <button type="submit"><h3>Pay Now</h3></button>
+    </form>
+</div>
+</div>
+</body>
+</html>

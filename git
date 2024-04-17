@@ -1,0 +1,4 @@
+git add .
+git commit -m "mac_april_1"
+git push origin main / -f
+dont forgot to write a message before commit

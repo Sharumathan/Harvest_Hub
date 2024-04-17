@@ -1,0 +1,25 @@
+import schedule
+import time
+
+def update():
+    print('its working man')
+
+schedule.every(10).seconds.do(update)
+
+while 1:
+    schedule.run_pending()
+    time.sleep(1)
+
+
+import datetime
+from datetime import date
+ 
+month = date.today().month
+month_abbrev = date.today().strftime("%b")
+month_text = date.today().strftime("%B")
+print("Current month: ", month, month_abbrev, month_text)
+ 
+year = date.today().year
+year_short = date.today().strftime("%y")
+year_entire = date.today().strftime("%Y")
+print("Current year: ", year, year_short, year_entire)

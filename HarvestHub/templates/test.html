@@ -1,0 +1,14 @@
+{% extends 'HarvestHub/layouts/main.html' %}
+{% load static %}
+{% block head%}
+    <link rel="stylesheet" href="{% static 'CSS/weather_report.css' %}">
+{% endblock head%}
+{% block title %}
+    Test
+{% endblock title %}
+{% block content %}
+
+    <h1>Radar Forecast Map</h1>
+    <img src="data:image/png;base64,{{ map_data }}" alt="Radar Forecast Map">
+
+{% endblock content %}

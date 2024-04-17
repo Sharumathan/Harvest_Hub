@@ -1,0 +1,164 @@
+
+     {% extends 'layouts/main.html'%}
+     {% load static%}
+     {% block title %}
+     Products
+     {% endblock title %}
+
+     {% block css %}
+     <link rel="stylesheet" href="{%static 'css/customer/product_sell.css'%}">
+     <script src="https://unpkg.com/scrollreveal"></script>
+     {% endblock css%}
+
+     {% block content %}
+     <div class="topImage">
+          <img src="{%static 'images/customer/image1_product_main.jpg'%}" alt="">
+          <div class="set">
+               <img src="{%static 'images/customer/natural2.png'%}" alt="">
+          </div>
+     </div>
+     <div class="mainText">
+         <span> Harvest Hub </span>
+     </div>
+     <div class="offers">
+          <div class="offer1">
+               <img src="{%static 'images/customer/light_pink.jpg'%}" alt="">
+               <form action="" class="fruitSearch">
+                    <input type="hidden">
+                    <input type="submit" class="fruits_nav" value="Fruits">
+               </form>
+          </div>
+          <div class="offer2">
+               <img src="{%static 'images/customer/green_veg.jpg'%}" alt="">
+               <form action="" class="leavesSearch">
+                    <input type="hidden">
+                    <input type="submit" class="leave_nav" value="Leaves">
+               </form>
+          </div>
+          <div class="offer3">
+               <img src="{%static 'images/customer/vegi_yello_triangle.jpg'%}" alt="">
+               <form action="" class="vegSearch">
+                    <input type="hidden">
+                    <input type="submit" class="veg_nav" value="VeGEE">
+               </form>
+          </div>
+     </div>
+     <form action="" class="searchBar">
+          <input type="text" name="searchProduct" placeholder="Search For Products">
+          <div class="submitCover_1">
+               <label for="submit_1">
+                    <img class="search" src="{%static 'images/customer/searchbar.png'%}" >
+               </label>
+               <input type="submit"  id="submit_1" >
+          </div>
+     </form>
+     <div class="products">
+          <div class="product">
+               <div class="type">
+                    <span>VeGEE</span>
+                     BrokoliE
+               </div>
+               <div class="image_content">
+                    <img src="{%static 'images/customer/brakoli.jpg'%}" alt="">
+               </div>
+               <div class="otherDetails">
+                    <button><a class="buy" href="">buy Now</a></button>
+                    <button><a class="cart" href="">Add to Cart</a></button>
+               </div>
+          </div>
+          <div class="product">
+               <div class="type">
+                    <span>VeGEE</span>
+                     BrokoliE
+               </div>
+               <div class="image_content">
+                    <img src="{%static 'images/customer/mockup-graphics-wZA_OQVjyaI-unsplash.jpg'%}" alt="">
+               </div>
+               <div class="otherDetails">
+                    <button><a class="buy" href="">buy Now</a></button>
+                    <button><a class="cart" href="">Add to Cart</a></button>
+               </div>
+          </div>
+          <div class="product">
+               <div class="type">
+                    <span>VeGEE</span>
+                     BrokoliE
+               </div>
+               <div class="image_content">
+                    <img src="{%static 'images/customer/mockup-graphics-O6KfGA_g1_M-unsplash.jpg'%}" alt="">
+               </div>
+               <div class="otherDetails">
+                    <button><a class="buy" href="">buy Now</a></button>
+                    <button><a class="cart" href="">Add to Cart</a></button>
+               </div>
+          </div>
+          <div class="product">
+               <div class="type">
+                    <span>VeGEE</span>
+                     BrokoliE
+               </div>
+               <div class="image_content">
+                    <img src="{%static 'images/customer/k8-0_fkPHulv-M-unsplash.jpg'%}" alt="">
+               </div>
+               <div class="otherDetails">
+                    <button><a class="buy" href="">buy Now</a></button>
+                    <button><a class="cart" href="">Add to Cart</a></button>
+               </div>
+          </div>
+          <div class="product">
+               <div class="type">
+                    <span>VeGEE</span>
+                     BrokoliE
+               </div>
+               <div class="image_content">
+                    <img src="{%static 'images/customer/hari-krishnan-f1BMuugVyyM-unsplash.jpg'%}" alt="">
+               </div>
+               <div class="otherDetails">
+                    <button><a class="buy" href="">buy Now</a></button>
+                    <button><a class="cart" href="">Add to Cart</a></button>
+               </div>
+          </div>
+          <div class="product">
+               <div class="type">
+                    <span>VeGEE</span>
+                     BrokoliE
+               </div>
+               <div class="image_content">
+                    <img src="{%static 'images/customer/mockup-graphics-lDhhUl3Gp3Q-unsplash.jpg'%}" alt="">
+               </div>
+               <div class="otherDetails">
+                    <button><a class="buy" href="">buy Now</a></button>
+                    <button><a class="cart" href="">Add to Cart</a></button>
+               </div>
+          </div>
+          <div class="product">
+               <div class="type">
+                    <span>VeGEE</span>
+                     BrokoliE
+               </div>
+               <div class="image_content">
+                    <img src="{%static 'images/customer/mockup-graphics-lQTseBMwzJ8-unsplash.jpg'%}" alt="">
+               </div>
+               <div class="otherDetails">
+                    <button><a class="buy" href="">buy Now</a></button>
+                    <button><a class="cart" href="">Add to Cart</a></button>
+               </div>
+          </div>
+          <div class="product">
+               <div class="type">
+                    <span>VeGEE</span>
+                     BrokoliE
+               </div>
+               <div class="image_content">
+                    <img src="{%static 'images/customer/mockup-graphics-pleChDr5d4w-unsplash.jpg'%}" alt="">
+               </div>
+               <div class="otherDetails">
+                    <button><a class="buy" href="">buy Now</a></button>
+                    <button><a class="cart" href="">Add to Cart</a></button>
+               </div>
+          </div>
+
+     </div>
+     <script src="{%static 'js/customer/product_sell.js'%}"></script>
+     {% endblock content %}
+</html>

@@ -16,9 +16,6 @@ from django.db.models import Q
 
 # Create your views here.
 
-
-
-
 def graph_view(request):
     
     sales = Sales.objects.filter(user='mathushan')

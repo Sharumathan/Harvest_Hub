@@ -1,0 +1,118 @@
+{% extends 'customer/base.html'%}
+{%load static%}
+{%block title%}Over View {%endblock title%}
+{%block middle%}
+<div class="addItems">
+     <span class="welcome">Products,<span class="nameWEl">Plus</span></span><br>
+     <span class="cus">Products Details system</span><br>
+     <form action="addItems" method="post" enctype="multipart/form-data">
+          {% csrf_token%}
+     <div class="upperDiv">
+          
+          {%if updateProduct == None %}
+          <span id="fileName"></span>
+          <div class="image">
+               <div class="">
+                    <label for="submit_2">
+                         <img id="imageDisplay" class="addImage" src="{%static 'images/customer/add_mage.png'%}" >
+                    </label>
+                    <input type="file" id="submit_2" class="hide" onchange="displayImage(event)" name="productImage">
+                    
+               </div>
+          </div>
+          <div class="otherDetails">
+               <div class="top">
+                    <select id="products" class="drop" name="category">
+                         <option value="Fruits">Fruits</option>
+                         <option value="Vegetable">Vegetable</option>
+                         <option value="Leaf Item">Leaf Item</option>
+                    </select>
+               </div>
+               <input class="Input" type="text" placeholder="Product Title" name="title">
+               <input class="Input" type="text" placeholder="Price" name="price">
+               <input class="Input" type="date" name="date" >
+               <input class="Input" type="text" placeholder="Life time in Days" name="lifeTime">
+               <input class="Input" type="text" placeholder="Description" name="description">
+               <div class="addNoww">
+                    <input class="addNow" type="submit" value="ADD NOW" name="addnow">
+               </div>
+          </div>
+          {%else%}
+          <span id="fileName"></span>
+          <div class="image">
+               <div class="">
+                    <label for="submit_2">
+                         <img id="imageDisplay" class="addImage" src="{{updateProduct.image.url}}" >
+                    </label>
+                    <input type="file" id="submit_2" class="hide" onchange="displayImage(event)" name="productImage" value="{{updateProduct.image}}">
+                    
+               </div>
+          </div>
+          <div class="otherDetails">
+               <div class="top">
+                    <select id="products" class="drop" name="category" >
+                         {%if updateProduct.category == "Fruits"%}
+                         <option value="Fruits" selected>Fruits</option>
+                         <option value="Vegetable">Vegetable</option>
+                         <option value="Leaf Item">Leaf Item</option>
+                         {%elif updateProduct.category == "Vegetable"%}
+                         <option value="Fruits">Fruits</option>
+                         <option value="Vegetable" selected>Vegetable</option>
+                         <option value="Leaf Item">Leaf Item</option>
+                         {%else%}
+                         <option value="Fruits">Fruits</option>
+                         <option value="Vegetable">Vegetable</option>
+                         <option value="Leaf Item" selected>Leaf Item</option>
+                         {%endif%}
+                    </select>
+               </div>
+               <input class="Input" type="text" placeholder="Product Title" name="title" value="{{updateProduct.product_title}}">
+               <input type="hidden" value="{{updateProduct.product_title}}" name="updateable">
+               <img src="" alt="">
+               <input class="Input" type="text" placeholder="Price" name="price" value="{{updateProduct.price}}">
+               <input class="Input" type="date" name="date" value="{{updateProduct.date_added}}">
+               <input class="Input" type="text" placeholder="Life time in Days" name="lifeTime" value="{{updateProduct.life_time}}">
+               <input class="Input" type="text" placeholder="Description" name="description" value="{{updateProduct.description}}">
+               <div class="addNoww">
+                    <input class="addNow" type="submit" value="UPDATE NOW" name="addnow">
+                    <input class="addnew" type="submit" value="+" name="addnow">
+               </div>
+          </div>
+          {%endif%}
+          
+     </div>
+</form>
+</div>
+{%endblock middle%}
+{%block right%}
+<div class="productThird">
+     <div class="productThird-head">
+          <span class="onee">Available Products</span><br>
+          <span class="twoo">All the Harvest Hub customer products</span>
+          
+     </div>
+     <div class="allProducts">
+          {% for product in all_products%}
+          <div class="singleProduct">
+               <img class="imagesi" src="{{product.image.url}}" alt="">
+               <div class="prodetails">
+                    <span>{{product.product_title}}</span>
+                    <span class="desc">{{product.description}}</span>
+               </div>
+               <form action="addItems" class="upDel" method="post">
+                    {% csrf_token%}
+                    <input type="hidden" name="product" value="{{product.product_title}}">
+               <input class="update" type="submit" value="Update" name="addnow">
+               <input class="delete" type="submit" value="Delete" name="addnow">
+               </form>
+          </div>
+          {%endfor%}
+         
+     </div>
+</div>
+     {% for message in messages%}
+     <script>
+          alert('{{message}}')
+     </script>
+     {%endfor%}
+{%endblock right%}

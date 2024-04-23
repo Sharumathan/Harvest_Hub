@@ -1,0 +1,90 @@
+{% extends 'customer/base.html'%}
+{%load static%}
+{%block title%}Over View {%endblock title%}
+{%block middle%}
+<span class="welcome">Welcome,<span class="nameWEl">Sharuk</span></span><br>
+<span class="cus">Customer Management system</span>
+<div class="rateThree">
+     <div class="customerRise">
+          <div class="upper1">
+               {{customer_growth}}%
+          </div>
+          <span>Customer Growth</span>
+     </div>
+     <div class="productSales">
+          <div class="upper2">
+               {{product_growth}}%
+          </div>
+          <span>Products Growth</span>
+     </div>
+     <div class="unknown">
+          <div class="upper3">
+               33%
+          </div>
+          <span>Sales Growth</span>
+     </div>
+</div>
+<div class="mainGraph">
+          <canvas id="myChart" class="barchart"></canvas>
+</div>
+{%endblock middle%}
+{%block right%}
+<div class="nameProfile">
+     <img class="bell" src="{%static 'images/customer/bell.png'%}" alt="">
+     <span>Sharumathan Manager</span>
+     <img class="profile" src="{%static 'images/customer/elon.jpg'%}" alt="">
+</div>
+<div class="thirdmid">
+     <div class="photo">
+          <img src="{%static 'images/customer/sean-oulashin-KMn4VEeEPR8-unsplash.jpg'%}" alt="">
+     </div>
+     <div class="re">
+          <span class="thirdMidTitle">Customer Support</span>
+          <a href="">View All</a>
+     </div>
+     <div class="customerReports">
+          <div class="fullContent">
+               <img src="{%static 'images/customer/photo1.png'%}" alt="">
+               <div class="col">
+                    <a class="nameS" href="">Sharumathan</a>
+                    <span >Hii sir i am unable to make payment using my payal accout can you</span>
+               </div>
+          </div>
+     </div>
+     <div class="customerReports">
+          <div class="fullContent">
+               <img src="{%static 'images/customer/photo4.png'%}" alt="">
+               <div class="col">
+                    <a class="nameS" href="">Sharumathan</a>
+                    <span >Hii sir i am unable to make payment using my payal accout can you</span>
+               </div>
+          </div>
+     </div>
+     <div class="customerReports">
+          <div class="fullContent">
+               <img src="{%static 'images/customer/photo3.png'%}" alt="">
+               <div class="col">
+                    <a class="nameS" href="">Sharumathan</a>
+                    <span >Hii sir i am unable to make payment using my payal accout can you</span>
+               </div>
+          </div>
+     </div>
+     <div class="customerReports">
+          <div class="fullContent">
+               <img src="{%static 'images/customer/photo2.png'%}" alt="">
+               <div class="col">
+                    <a class="nameS" href="">Sharumathan</a>
+                    <span >Hii sir i am unable to make payment using my payal accout can you</span>
+               </div>
+          </div>
+     </div>
+     <div class="customerReports">
+          <div class="fullContent">
+               <img src="{%static 'images/customer/photo5.png'%}" alt="">
+               <div class="col">
+                    <a class="nameS" href="">Sharumathan</a>
+                    <span >Hii sir i am unable to make payment using my payal accout can you</span>
+               </div>
+          </div>
+     </div>
+{%endblock right%}

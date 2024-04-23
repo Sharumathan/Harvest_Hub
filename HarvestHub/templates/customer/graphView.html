@@ -1,0 +1,25 @@
+{% extends 'customer/base.html'%}
+{%load static%}
+{%block title%}Over View {%endblock title%}
+{%block middle%}
+<div class="graphView">
+     <span class="welcome">Graph,<span class="nameWEl">Representation</span></span><br>
+     <span class="cus">Get in the Flow of our system</span><br>
+     <div class="graph1">
+          <canvas id="myChart1" class="barchart"></canvas>
+     </div>
+     <div class="graph2">
+          <canvas id="myChart2" class="barchart"></canvas>
+     </div>
+</div>
+{%endblock middle%}
+{%block right%}
+<div class="third_graph">
+     <div class="donut">
+          <canvas id="donut" class="barchart"></canvas>
+     </div>
+     <div class="pie">
+          <canvas id="pie" class="barchart"></canvas> 
+     </div>
+</div>
+{%endblock right%}

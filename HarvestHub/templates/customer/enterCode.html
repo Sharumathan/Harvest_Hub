@@ -1,0 +1,40 @@
+     {% extends 'layouts/main.html'%}
+     {% load static%}
+     {% block title %}
+          Account
+     {% endblock title %}
+
+     {% block css %}
+     <link rel="stylesheet" href="{%static 'css/customer/entercode.css'%}">
+     <script src="{%static 'https://unpkg.com/scrollreveal'%}"></script>
+     {% endblock css%}
+
+     {% block content %}
+     <div class="body">
+          <div class="overLay"></div>
+          <div class="content">
+               <div class="form">
+                    <div class="fullForm" id="fullForm">
+                         <div class="forgotPassword">
+                              
+                              <form action="checkCode" method="post">
+                                   {%csrf_token%}
+                                   <span class="sign_in">Enter code number</span>
+                                   <span class="ini"> 6 digit code sent to {{hint}}xxxx.com </span>
+                                   <input type="text" name="userCode" placeholder="Code"><br>
+                                   <input type="hidden" value="{{code}}" name="code">
+                                   <input type="hidden" value="{{username}}" name="username">
+                                   <input type="submit" value="Continue" class="login_but">
+                                   <span class="in">Rememberd Password ? <a class="red" href="">Sign in</a></span>
+                              </form>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     
+     </div>
+     </div>
+     
+     <script src="js/login_signup.js"></script>
+     {% endblock content %}
+</html>

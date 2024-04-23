@@ -1,0 +1,85 @@
+
+     {% extends 'layouts/main.html'%}
+     {% load static%}
+     {% block title %}
+     Products
+     {% endblock title %}
+
+     {% block css %}
+     <link rel="stylesheet" href="{%static 'css/customer/product_sell.css'%}">
+     <script src="https://unpkg.com/scrollreveal"></script>
+     {% endblock css%}
+
+     {% block content %}
+     <div class="topImage">
+          <img src="{%static 'images/customer/image1_product_main.jpg'%}" alt="">
+          <div class="set">
+               <img src="{%static 'images/customer/natural2.png'%}" alt="">
+          </div>
+     </div>
+     <div class="mainText">
+          <span class="userNote">Hi, {% if user.is_authenticated%}{{user.first_name}}{%endif%}</span>
+         <span> Harvest Hub </span>
+     </div>
+     <div class="offers">
+          <div class="offer1">
+               <img src="{%static 'images/customer/light_pink.jpg'%}" alt="">
+               <form action="products_sell" class="fruitSearch" method="post">
+                    {%csrf_token%}
+                    <input type="hidden">
+                    <input type="submit" class="fruits_nav" value="Fruits" name="sort">
+               </form>
+          </div>
+          <div class="offer2">
+               <img src="{%static 'images/customer/green_veg.jpg'%}" alt="">
+               <form action="products_sell" class="leavesSearch" method="post">
+                    {%csrf_token%}
+                    <input type="hidden">
+                    <input type="submit" class="leave_nav" value="Leaves" name="sort">
+               </form>
+          </div>
+          <div class="offer3">
+               <img src="{%static 'images/customer/vegi_yello_triangle.jpg'%}" alt="">
+               <form action="products_sell" class="vegSearch" method="post">
+                    {%csrf_token%}
+                    <input type="hidden">
+                    <input type="submit" class="veg_nav" value="VeGEE" name="sort">
+               </form>
+          </div>
+     </div>
+     <form action="products_sell" class="searchBar" method="post">
+          <input type="text" name="searchProduct" placeholder="Search For Products">
+          <div class="submitCover_1">
+               <label for="submit_1">
+                    <img class="search" src="{%static 'images/customer/searchbar.png'%}" >
+               </label>
+               <input type="submit"  id="submit_1" value="search_Pro" name="sort">
+          </div>
+          {%csrf_token%}
+     </form>
+     <div class="products">
+          {% for product in all_products%}
+          <div class="product">
+               <div class="type">
+                    {%if product.category == 'Vegetable'%}
+                    <span>VeGEE</span>
+                    {%elif product.category == 'Fruits'%}
+                    <span>Fruits</span>
+                    {%else%}
+                    <span>Leves</span>
+                    {%endif%}
+                     {{product.product_title}}
+               </div>
+               <div class="image_content">
+                    <img src="{{product.image.url}}" alt="">
+               </div>
+               <div class="otherDetails">
+                    <button><a class="buy" href="{% url 'payment' %}">buy Now</a></button>
+                    <button><a class="cart" href="">Add to Cart</a></button>
+               </div>
+          </div>
+          {%endfor%}
+     </div>
+     <script src="{%static 'js/customer/product_sell.js'%}"></script>
+     {% endblock content %}
+</html>

@@ -1,0 +1,12 @@
+payment
+
+Hi, {% if request.user.is_authenticated%}{{request.user.first_name}}{%endif%}
+{% if request.user.is_authenticated %}
+    {{ request.user.first_name }}
+{% endif %}
+
+{% if request.user.is_authenticated %}
+    User is authenticated.
+{% else %}
+    User is not authenticated.
+{% endif %}

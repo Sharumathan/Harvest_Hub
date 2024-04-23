@@ -1,0 +1,77 @@
+{% extends 'customer/base.html'%}
+{%load static%}
+{%block title%}Customers {%endblock title%}
+{%block middle%}
+<div class="customerPage">
+     <span class="welcome">Customer,<span class="nameWEl">Details</span></span><br>
+     <span class="cus">Customer Details system</span><br>
+     <div class="hel">
+          <form action="adminCustomer" class="formAd" method="post">
+               {%csrf_token%}
+          <input type="text" class="customerSearch" placeholder="Search Customer" name="searchContent">
+          <div class="submitCover_1">
+               <label for="submit_1">
+                    <img class="search" src="{%static 'images/customer/searchbar.png'%}" >
+               </label>
+               <input class="hide" type="submit"  id="submit_1" value="search" name="adminCustomer_button">
+          </form>
+          </div>
+     </div>
+     <div class="detailsTable">
+          <div class="details_all">
+               {%for customer in customers%}
+               <div class="single">
+                    <div class="image_admin_cus">
+                         <img src="{{customer.profile_photo.url}}" alt="">
+                    </div>
+                    <div class="usernameAli">
+                         <span>{{customer.username}}</span>
+                    </div>
+                    <div class="emailAli">
+                         <span>{{customer.email}}</span>
+                    </div>
+                    <div class="phoneAli">
+                         <span>{{customer.phone_number}}</span>
+                    </div>
+                    
+                    <form action="adminCustomer" method="post">
+                         {%csrf_token%}
+                         <input type="hidden" value="{{customer.username}}" name="username">
+                    <input class="view" type="submit" value="View" name="adminCustomer_button">
+                    <input class="remove" type="submit" value="Remove" name="adminCustomer_button">
+                    </form>
+               </div>
+               {%endfor%}
+          </div>
+          
+     </div>
+</div>
+{%endblock middle%}
+{%block right%}
+{%if view_Enabled is not None%}
+     <div class="wholeDetails">
+          <div class="profileAd">
+               <img src="{{view_Enabled.profile_photo.url}}" alt="">
+          </div>
+          <span class="fullNameAd">{{view_Enabled.first_name}} {{view_Enabled.last_name}}</span>
+          <div class="usernameAd">
+               <span class="headingAi">User Name</span>  <span>{{view_Enabled.username}}</span>
+          </div>
+          <div class="emailAd">
+               <span class="headingAi">Email</span>  <span>{{view_Enabled.email}}</span>
+          </div>
+          <div class="phoneNoAd">
+               <span class="headingAi">Phone No</span>  <span>{{view_Enabled.phone_number}}</span>
+          </div>
+          <div class="totalPurches">
+               <span class="headingAi">Total Purches</span>  <span>{{view_Enabled.total_purches}}</span>
+          </div>
+          <div class="dateJoined">
+              <span class="headingAi">Date joined</span>  <span>{{view_Enabled.joined_date}}</span>
+          </div>
+          <div class="bioAd">
+               <span class="headingAi">About</span>  <span>{{view_Enabled.bio}}</span>
+            </div>
+     </div>
+     {%endif%}
+{%endblock right%}

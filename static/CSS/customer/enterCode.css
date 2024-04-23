@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+*{
+     margin: 0;
+     padding: 0;
+     font-family: Poppins;
+}
+body{
+     background-image:url("../../images/customer/sean-oulashin-KMn4VEeEPR8-unsplash.jpg");
+     background-size: cover;
+     background-attachment: fixed;
+}
+.body{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 100vh;
+}
+
+.overLay{
+     background-color: rgba(0, 0, 0, 0.457);
+     background-size:cover;
+     position: absolute;
+     left: 0; right: 0;
+     top: 0; bottom: 0;
+}
+.content{
+     position: absolute;
+}
+.fullForm{
+     height: 100%;
+     display: flex;
+     transition: 1s;
+}
+.ini{
+     margin-bottom: 40px;
+     margin-top: 10px;
+}
+.form{
+     height: 500px;
+     border-style: solid;
+     border-color: yellowgreen;
+     display: flex;
+     flex-direction: column;
+     justify-content:center;
+     align-items: center;
+     box-shadow: 0 5px 15px 0 rgba(212, 255, 0, 0.443), 5px 0px 20px 0 rgba(0, 0, 0, 0.5);
+     width: 400px;
+     background-color: rgba(0, 0, 0, 0.301);
+     border-radius: 20px;
+}
+.login{
+     color: white;
+     display: flex;
+     justify-content: center;
+     flex-direction: column;
+     align-items: center;
+}
+.login input{
+     width: 300px;
+     height: 50px;
+     border-radius: 40px;
+     border-style: none;
+     padding-left: 20px;
+     color: white;
+     font-size: 15px;
+}
+
+.forgotPassword input{
+     width: 300px;
+     height: 50px;
+     border-radius: 40px;
+     border-style: none;
+     padding-left: 20px;
+     color: white;
+     font-size: 15px;
+}
+.forgotPassword .login_but{
+     font-size: 15px;
+     background-color: rgb(255, 43, 92);
+     cursor: pointer;
+     width: 150px;
+     color: white;
+     padding-left: 10px;
+     padding-right: 10px;
+     margin-bottom: 25px;
+}
+.forgotPassword{
+     color: white;
+     display: flex;
+     justify-content: center;
+     flex-direction: column;
+     align-items: center;
+}
+.login input,.forgotPassword input{
+     color: black;
+}
+
+.sign_in{
+     font-size: 25px;
+     margin-bottom: 30px;
+}
+.login .login_but{
+     font-size: 15px;
+     background-color: rgb(255, 43, 92);
+     width: 150px;
+     color: white;
+     cursor: pointer;
+     padding-left: 10px;
+     padding-right: 10px;
+     margin-bottom: 25px;
+}
+.red{
+     color: rgb(255, 0, 0);
+     text-decoration: none;
+     cursor: pointer;
+}
+.in{
+     cursor: pointer;
+     text-decoration: none;
+     color: rgb(255, 255, 255);
+     font-size:13px;
+}
+form{
+     display: flex;
+     justify-content:center;
+     align-items: center;
+     flex-direction: column;
+}
+.register{
+     color: white;
+     display: flex;
+     justify-content: center;
+     flex-direction: column;
+     align-items: center;
+}
+
+.register .register_btn{
+     font-size: 15px;
+     margin-top: 10px;
+     margin-bottom:10px;
+     cursor: pointer;
+     background-color: rgb(255, 43, 92);
+     width: 150px;
+     color: white;
+     padding-left: 10px;
+     padding-right: 10px;
+}
+.register .split_input{
+     margin-bottom: 10px;
+}
+.register .split_input .fname{
+     width:130px;
+     margin-right:5px;
+}
+.register .split_input .lname{
+     width:130px;
+     margin-left:5px;
+}
+.register input{
+     width: 300px;
+     height: 50px;
+     border-radius: 40px;
+     border-style: none;
+     padding-left: 20px;
+     font-size: 15px;
+}
+.register .rInput{
+     margin-bottom: 10px;
+}
+
+.login_txt{
+     font-size: 25px;
+     margin-bottom: 30px;
+}
